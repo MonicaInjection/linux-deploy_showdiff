@@ -18,7 +18,7 @@ if [ -z "${SOURCE_PATH}" ]
 then
     case "$(get_platform ${ARCH})" in
     x86*) SOURCE_PATH="http://archive.ubuntu.com/ubuntu/" ;;
-    arm*) SOURCE_PATH="http://ports.ubuntu.com/" ;;
+    arm*) SOURCE_PATH="http://mirrors.ustc.edu.cn/ubuntu-ports/" ;;
     esac
 fi
 
@@ -47,7 +47,7 @@ cat <<EOF
      Architecture of Linux distribution, supported "armel", "armhf", "arm64", "i386" and "amd64".
 
    --suite="${SUITE}"
-     Version of Linux distribution, supported versions "precise", "trusty", "xenial" and "bionic".
+     Version of Linux distribution, supported versions "precise", "trusty", "xenial", "bionic", "focal", "hirsute" and "jammy".
 
    --source-path="${SOURCE_PATH}"
      Installation source, can specify address of the repository or path to the rootfs archive.

@@ -942,9 +942,11 @@ extract_ar_deb_field () {
 	tarball=$(ar -t "$pkg" | grep "^control\.tar")
 
 	case "$tarball" in
-		control.tar.gz) cat_cmd=zcat ;;
-		control.tar.xz) cat_cmd=xzcat ;;
-		control.tar)    cat_cmd=cat ;;
+	    control.tar.zst) cat_cmd=zstdcat ;;
+		control..tar.gz)  cat_cmd=zcat ;;
+		control..tar.bz2) cat_cmd=bzcat ;;
+		control..tar.xz)  cat_cmd=xzcat ;;
+		control..tar)     cat_cmd=cat ;;
 		*) error 1 UNKNOWNCONTROLCOMP "Unknown compression type for %s in %s" "$tarball" "$pkg" ;;
 	esac
 
@@ -963,6 +965,7 @@ extract_ar_deb_data () {
 	tarball="$(ar -t "$pkg" | grep "^data.tar")"
 
 	case "$tarball" in
+	    data.tar.zst)  cat_cmd=zstdcat ;;
 		data.tar.gz)  cat_cmd=zcat ;;
 		data.tar.bz2) cat_cmd=bzcat ;;
 		data.tar.xz)  cat_cmd=xzcat ;;
